@@ -3,6 +3,19 @@
     margin: 0px;
 }
 
+button {
+    padding: 5px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:active {
+    background-color: #8ec5ff;
+
+}
+
 main {
     display: grid;
     grid-template-columns: auto 1fr;

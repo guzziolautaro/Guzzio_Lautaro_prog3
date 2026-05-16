@@ -63,7 +63,7 @@ class Carta {
         const alreadyExists = cardList.some(carta => carta.code === this.code);
 
         if (alreadyExists) {
-            alert(`La carta con código ${this.code} ya se encuentra guardada.`);
+            alert(`La carta con codigo ${this.code} ya se encuentra guardada`);
             return;
         }
 
@@ -77,6 +77,6 @@ class Carta {
         cardList.push(cardData);
         localStorage.setItem('storedCards', JSON.stringify(cardList));
 
-        alert(`¡Carta ${this.value} de ${this.suit} guardada con éxito!`);
+        alert(`Carta ${this.value} de ${this.suit} guardada con exito`);
     }
 }
