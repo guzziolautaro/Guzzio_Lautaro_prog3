@@ -55,3 +55,47 @@ function insertCards(cardsData) {
         pageHistory.push(cardInstances);
     }
 }
+
+function insertCardsFromHistory(pageIndex) {
+    const cardContainer = document.getElementById('cartas');
+    cardContainer.innerHTML = '';
+
+    const storedCards = pageHistory[pageIndex];
+    
+    storedCards.forEach(card => {
+        const htmlElement = card.createHtmlElement();
+        cardContainer.appendChild(htmlElement);
+    });
+}
+
+async function paginaSiguiente() {
+    try {
+        pageNum++;
+
+        if (pageNum < pageHistory.length) {
+            insertCardsFromHistory(pageNum);
+            return;
+        }
+
+        const cardsData = await getCartas(deckId);
+
+        if (!cardsData || cardsData.length === 0) {
+            throw new Error('No quedan mas cartas disponibles.');
+        }
+
+        insertCards(cardsData);
+    } catch (error) {
+        console.error('Error al cargar la pagina siguiente:', error);
+        pageNum--;
+    }
+}
+
+function paginaAnterior() {
+    if (pageNum === 0) {
+        console.log('No hay páginas anteriores disponibles.');
+        return;
+    }
+
+    pageNum--;
+    insertCardsFromHistory(pageNum);
+}

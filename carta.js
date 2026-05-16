@@ -26,9 +26,9 @@ class Carta {
         const infoElement = document.createElement('div');
         infoElement.className = 'carta-info';
         infoElement.innerHTML = `
-            <p><strong>Codigo:</strong> ${this.code}</p>
-            <p><strong>Palo:</strong> ${this.suit}</p>
-            <p><strong>Valor:</strong> ${this.value}</p>
+            <span><strong>Codigo:</strong> ${this.code}</span>
+            <span><strong>Palo:</strong> ${this.suit}</span>
+            <span><strong>Valor:</strong> ${this.value}</span>
         `;
 
         container.appendChild(imgElement);
