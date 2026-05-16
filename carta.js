@@ -29,6 +29,14 @@ class Carta {
 
         linkElement.appendChild(imgElement);
 
+        const buttonElement = document.createElement('button');
+        buttonElement.textContent = 'guardar';
+        buttonElement.className = 'btn-guardar';
+
+        buttonElement.addEventListener('click', () => {
+            this.guardarCarta();
+        });
+
         const infoElement = document.createElement('div');
         infoElement.className = 'carta-info';
         infoElement.innerHTML = `
@@ -39,7 +47,36 @@ class Carta {
 
         container.appendChild(linkElement);
         container.appendChild(infoElement);
+        container.appendChild(buttonElement);
 
         return container;
+    }
+
+    guardarCarta() {
+        const storedCards = localStorage.getItem('storedCards');
+        let cardList = [];
+
+        if (storedCards) {
+            cardList = JSON.parse(storedCards);
+        }
+
+        const alreadyExists = cardList.some(carta => carta.code === this.code);
+
+        if (alreadyExists) {
+            alert(`La carta con código ${this.code} ya se encuentra guardada.`);
+            return;
+        }
+
+        const cardData = {
+            code: this.code,
+            value: this.value,
+            suit: this.suit,
+            imagen: this.imagen
+        };
+
+        cardList.push(cardData);
+        localStorage.setItem('storedCards', JSON.stringify(cardList));
+
+        alert(`¡Carta ${this.value} de ${this.suit} guardada con éxito!`);
     }
 }
